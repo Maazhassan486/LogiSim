@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.logisim.ui.MainController"
+            stylesheets="@main-style.css">
+    
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New Project" onAction="#handleNewProject"/>
+                        <MenuItem text="Open Project" onAction="#handleOpenProject"/>
+                        <MenuItem text="Save Project" onAction="#handleSaveProject"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Export Diagram" onAction="#handleExportDiagram"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit" onAction="#handleExit"/>
+                    </items>
+                </Menu>
+                <Menu text="Circuit">
+                    <items>
+                        <MenuItem text="New Circuit" onAction="#handleNewCircuit"/>
+                        <MenuItem text="Delete Circuit" onAction="#handleDeleteCircuit"/>
+                    </items>
+                </Menu>
+                <Menu text="Simulation">
+                    <items>
+                        <MenuItem text="Run Simulation" onAction="#handleRunSimulation"/>
+                        <MenuItem text="Analyze Circuit" onAction="#handleAnalyzeCircuit"/>
+                    </items>
+                </Menu>
+                <Menu text="Help">
+                    <items>
+                        <MenuItem text="About" onAction="#handleAbout"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    
+    <left>
+        <VBox spacing="10" styleClass="palette-panel">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            
+            <Label text="Component Palette" styleClass="palette-title"/>
+            <Separator/>
+            
+            <VBox spacing="5" fx:id="componentPalette">
+                <Label text="Logic Gates"/>
+                <Button text="AND" onAction="#handleAddComponent" userData="AND" styleClass="component-button"/>
+                <Button text="OR" onAction="#handleAddComponent" userData="OR" styleClass="component-button"/>
+                <Button text="NOT" onAction="#handleAddComponent" userData="NOT" styleClass="component-button"/>
+                <Button text="NAND" onAction="#handleAddComponent" userData="NAND" styleClass="component-button"/>
+                <Button text="NOR" onAction="#handleAddComponent" userData="NOR" styleClass="component-button"/>
+                <Button text="XOR" onAction="#handleAddComponent" userData="XOR" styleClass="component-button"/>
+                
+                <Separator/>
+                <Label text="Components"/>
+                <Button text="Switch" onAction="#handleAddComponent" userData="SWITCH" styleClass="component-button"/>
+                <Button text="LED" onAction="#handleAddComponent" userData="LED" styleClass="component-button"/>
+                
+                <Separator/>
+                <Label text="Modules"/>
+                <Button text="Sub-Circuit" onAction="#handleAddComponent" userData="SUBCIRCUIT" styleClass="component-button"/>
+            </VBox>
+        </VBox>
+    </left>
+    
+    <center>
+        <VBox>
+            <HBox spacing="10" styleClass="toolbar">
+                <padding>
+                    <Insets top="5" right="5" bottom="5" left="5"/>
+                </padding>
+                <Label text="Current Circuit:"/>
+                <ComboBox fx:id="circuitComboBox" onAction="#handleCircuitSelection" prefWidth="200"/>
+                <Separator orientation="VERTICAL"/>
+                <Button text="Run Simulation" onAction="#handleRunSimulation" styleClass="action-button"/>
+                <Button text="Analyze" onAction="#handleAnalyzeCircuit" styleClass="action-button"/>
+                <Separator orientation="VERTICAL"/>
+                <Button text="Clear" onAction="#handleClearCanvas" styleClass="action-button"/>
+            </HBox>
+            
+            <ScrollPane fitToWidth="true" fitToHeight="true" fx:id="canvasScrollPane">
+                <Canvas fx:id="circuitCanvas" width="1000" height="600"/>
+            </ScrollPane>
+        </VBox>
+    </center>
+    
+    <right>
+        <VBox spacing="10" styleClass="properties-panel" prefWidth="250">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            
+            <Label text="Properties" styleClass="properties-title"/>
+            <Separator/>
+            
+            <VBox fx:id="propertiesPanel" spacing="5">
+                <Label text="Select a component to view properties"/>
+            </VBox>
+            
+            <Separator/>
+            
+            <Label text="Simulation Results" styleClass="properties-title"/>
+            <Separator/>
+            
+            <VBox fx:id="simulationResults" spacing="5">
+                <Label text="No simulation results"/>
+            </VBox>
+        </VBox>
+    </right>
+    
+    <bottom>
+        <HBox spacing="10" styleClass="status-bar">
+            <padding>
+                <Insets top="5" right="10" bottom="5" left="10"/>
+            </padding>
+            <Label text="Status: Ready" fx:id="statusLabel"/>
+        </HBox>
+    </bottom>
+</BorderPane>
+
